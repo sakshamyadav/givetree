@@ -19,4 +19,4 @@ if st.button("Find Outfit"):
     result = generate_text(prompt, api_key)
     prompt = f"extract key information from: {result}"
     entities = generate_text(prompt, api_key)
-    st.write(entities)
+    st.write(result)
