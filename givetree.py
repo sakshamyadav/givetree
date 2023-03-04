@@ -38,4 +38,4 @@ if st.button("Generate Text Art"):
             image = Image.open(BytesIO(image_bytes))
             st.image(image, caption="Text Art", use_column_width=True)
     else:
-        st.error("Error generating text art. Please try again.")
+        st.write(response.status_code)
