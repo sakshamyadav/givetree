@@ -1,41 +1,28 @@
+import openai
 import streamlit as st
-import requests
-from io import BytesIO
-from PIL import Image
+
+# Set up the OpenAI API
+openai.api_key = st.text_input("Enter your OpenAI API key:", type="password")
+model_engine = "text-davinci-003"
+
+# Define a function to extract information from a prompt using the OpenAI API
+def extract_information(prompt):
+    response = openai.Completion.create(
+        engine=model_engine,
+        prompt=f"Extract the celebrity name and fashion items from this prompt: {prompt}",
+        max_tokens=1024,
+        n=1,
+        stop=None,
+        temperature=0.5,
+    )
+    return response.choices[0].text.strip()
 
 # Set up the Streamlit app
-st.title("Text to Art Tool")
-
-# Define the input fields for the Streamlit app
-text = st.text_input("Enter your text here")
-num_images = st.number_input("Number of images to generate", value=1, min_value=1, max_value=10)
-api_key = st.text_input("Enter your OpenAI API key")
-
-# Generate the text art using the OpenAI DALL-E 2 API
-if st.button("Generate Text Art"):
-    # Send a POST request to the OpenAI DALL-E 2 API with the input text and desired number of images
-    response = requests.post(
-        "https://api.openai.com/v1/images/generations",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}" # Use the API key entered by the user
-        },
-        json={
-            "model": "image-alpha-001",
-            "prompt": f"Generate an image of '{text}' using the dall-e-2 model",
-            "num_images": num_images,
-            "size": "512x512",
-            "response_format": "url"
-        }
-    )
-
-    # Display the generated text art
-    if response.status_code == 200:
-        results = response.json()["data"]
-        for result in results:
-            image_url = result["url"]
-            image_bytes = requests.get(image_url).content
-            image = Image.open(BytesIO(image_bytes))
-            st.image(image, caption="Text Art", use_column_width=True)
+st.title("OpenAI Text Extraction Demo")
+prompt = st.text_input("Enter a prompt:")
+if st.button("Extract information"):
+    if not openai.api_key:
+        st.error("Please enter your OpenAI API key")
     else:
-        st.error("Error generating text art: {}".format(response.text))
+        information = extract_information(prompt)
+        st.write(information)
