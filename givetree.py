@@ -1,28 +1,20 @@
-import openai
 import streamlit as st
+import openai
 
-# Set up the OpenAI API
-openai.api_key = st.text_input("Enter your OpenAI API key:", type="password")
-model_engine = "text-davinci-003"
+def generate_text(prompt, api_key):
+    openai.api_key = api_key
+    model_engine = "text-davinci-002"
+    completions = openai.Completion.create(engine=model_engine, prompt=prompt, max_tokens=2048)
+    message = completions.choices[0].text
+    return message.strip()
 
-# Define a function to extract information from a prompt using the OpenAI API
-def extract_information(prompt):
-    response = openai.Completion.create(
-        engine=model_engine,
-        prompt=f"Extract the celebrity name, event and fashion items from this prompt: {prompt}",
-        max_tokens=1024,
-        n=1,
-        stop=None,
-        temperature=0.5,
-    )
-    return response.choices[0].text.strip()
+st.title("Celebrity Outfit Finder")
 
-# Set up the Streamlit app
-st.title("OpenAI Text Extraction Demo")
-prompt = st.text_input("Enter a prompt:")
-if st.button("Extract information"):
-    if not openai.api_key:
-        st.error("Please enter your OpenAI API key")
-    else:
-        information = extract_information(prompt)
-        st.write(information)
+api_key = st.text_input("Enter your OpenAI API key:")
+celebrity_name = st.text_input("Enter the celebrity name:")
+event_name = st.text_input("Enter the event name:")
+
+if st.button("Find Outfit"):
+    prompt = f"What did {celebrity_name} wear to {event_name}?"
+    result = generate_text(prompt, api_key)
+    st.write(result)
