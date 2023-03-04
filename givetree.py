@@ -2,7 +2,7 @@ import openai
 import streamlit as st
 
 # Define function to extract information from text
-def extract_information(input_text, information, api_key):
+def extract_information(information, api_key):
     openai.api_key = api_key
     prompt = (f"Extract the {information} from the following text:\n\n"
               f"{input_text}\n\n"
