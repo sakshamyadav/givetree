@@ -9,7 +9,7 @@ model_engine = "text-davinci-003"
 def extract_information(prompt):
     response = openai.Completion.create(
         engine=model_engine,
-        prompt=f"Extract the celebrity name and fashion items from this prompt: {prompt}",
+        prompt=f"Extract the celebrity name, event and fashion items from this prompt: {prompt}",
         max_tokens=1024,
         n=1,
         stop=None,
