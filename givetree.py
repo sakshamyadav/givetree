@@ -26,7 +26,6 @@ st.title("What Did They Wear?")
 api_key = st.text_input("Enter your OpenAI API key:")
 celebrity_name = st.text_input("Enter the name of the celebrity:")
 event_name = st.text_input("Enter the name of the event:")
-input_text = st.text_input("Enter the text to extract information from:")
 information = st.selectbox("Select the information to extract:", ["Dress", "Shoes", "Jewelry", "All"])
 
 # Extract information on button click
@@ -37,13 +36,11 @@ if st.button("Extract Information"):
         st.warning("Please enter the name of the celebrity.")
     elif not event_name:
         st.warning("Please enter the name of the event.")
-    elif not input_text:
-        st.warning("Please enter some text to extract information from.")
     elif information == "All":
-        dress = extract_information(input_text, "dress", api_key)
-        shoes = extract_information(input_text, "shoes", api_key)
-        jewelry = extract_information(input_text, "jewelry", api_key)
+        dress = extract_information("dress and brand", api_key)
+        shoes = extract_information("shoes and brand", api_key)
+        jewelry = extract_information("jewelry and brand", api_key)
         st.write(f"{celebrity_name} wore {dress}, paired with {shoes} and {jewelry} at {event_name}.")
     else:
-        extracted_info = extract_information(input_text, information.lower(), api_key)
+        extracted_info = extract_information(information.lower(), api_key)
         st.write(f"{celebrity_name} wore {extracted_info} at {event_name}.")
