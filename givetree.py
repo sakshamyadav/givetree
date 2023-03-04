@@ -11,9 +11,9 @@ text = st.text_input("Enter your text here")
 num_images = st.number_input("Number of images to generate", value=1, min_value=1, max_value=10)
 api_key = st.text_input("Enter your OpenAI API key")
 
-# Generate the text art using the OpenAI CLIP guided Diffusion API
+# Generate the text art using the OpenAI DALL-E 2 API
 if st.button("Generate Text Art"):
-    # Send a POST request to the OpenAI CLIP guided Diffusion API with the input text and desired number of images
+    # Send a POST request to the OpenAI DALL-E 2 API with the input text and desired number of images
     response = requests.post(
         "https://api.openai.com/v1/images/generations",
         headers={
@@ -21,10 +21,10 @@ if st.button("Generate Text Art"):
             "Authorization": f"Bearer {api_key}" # Use the API key entered by the user
         },
         json={
-            "model": "image-gpt-2-ada",
-            "prompt": f"Generate an image of '{text}' using the image-gpt-2-ada model",
+            "model": "image-alpha-001",
+            "prompt": f"Generate an image of '{text}' using the dall-e-2 model",
             "num_images": num_images,
-            "size": "1024x1024",
+            "size": "512x512",
             "response_format": "url"
         }
     )
