@@ -21,7 +21,7 @@ if st.button("Generate Text Art"):
             "Authorization": f"Bearer {api_key}" # Replace with your API key
         },
         json={
-            "model": "image-alpha-001", # DALL-E model to use
+            "model": "code-davinci-002", # DALL-E model to use
             "prompt": f"Generate an image of '{text}'",
             "num_images": num_images,
             "size": "256x256",
