@@ -9,7 +9,7 @@ st.title("Text to Art Tool")
 # Define the input fields for the Streamlit app
 text = st.text_input("Enter your text here")
 num_images = st.number_input("Number of images to generate", value=1, min_value=1, max_value=10)
-api_key = st.text_input("Enter API Key")
+api_key = st.text_input("Enter your OpenAI API key")
 
 # Generate the text art using the OpenAI DALL-E API
 if st.button("Generate Text Art"):
@@ -18,7 +18,7 @@ if st.button("Generate Text Art"):
         "https://api.openai.com/v1/images/generations",
         headers={
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}" # Replace with your API key
+            "Authorization": f"Bearer {api_key}" # Use the API key entered by the user
         },
         json={
             "model": "image-alpha-003", # DALL-E model to use
@@ -38,4 +38,4 @@ if st.button("Generate Text Art"):
             image = Image.open(BytesIO(image_bytes))
             st.image(image, caption="Text Art", use_column_width=True)
     else:
-        st.write(response.status_code)
+        st.error("Error generating text art. Please try again.")
