@@ -21,7 +21,7 @@ if st.button("Generate Text Art"):
             "Authorization": f"Bearer {api_key}" # Use the API key entered by the user
         },
         json={
-            "model": "image-alpha-003", # DALL-E model to use
+            "model": "image-alpha-001", # DALL-E 2 model to use
             "prompt": f"Generate an image of '{text}'",
             "num_images": num_images,
             "size": "1024x1024",
@@ -38,4 +38,4 @@ if st.button("Generate Text Art"):
             image = Image.open(BytesIO(image_bytes))
             st.image(image, caption="Text Art", use_column_width=True)
     else:
-        st.error("Error generating text art. Please try again.")
+        st.error("Error generating text art: {}".format(response.text))
