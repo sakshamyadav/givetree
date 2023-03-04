@@ -21,8 +21,8 @@ if st.button("Generate Text Art"):
             "Authorization": f"Bearer {api_key}" # Use the API key entered by the user
         },
         json={
-            "model": "image-alpha-003",
-            "prompt": f"Generate an image of '{text}' using the image-alpha-003 model",
+            "model": "image-gpt-2-ada",
+            "prompt": f"Generate an image of '{text}' using the image-gpt-2-ada model",
             "num_images": num_images,
             "size": "1024x1024",
             "response_format": "url"
