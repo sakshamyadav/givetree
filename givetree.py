@@ -4,7 +4,7 @@ import streamlit as st
 # Define function to extract information from text
 def extract_information(celebrity_name, event_name,information, api_key):
     openai.api_key = api_key
-    prompt = (f"Extract the {information} from the following text:\n\n"
+    prompt = (f"Extract the {information} and brand from the following text:\n\n"
               f"What {information} did {celebrity_name} wear at {event_name}")
     response = openai.Completion.create(
         engine="text-davinci-002",
