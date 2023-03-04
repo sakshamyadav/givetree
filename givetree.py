@@ -2,11 +2,10 @@ import openai
 import streamlit as st
 
 # Define function to extract information from text
-def extract_information(information, api_key):
+def extract_information(celebrity_name, event_name,information, api_key):
     openai.api_key = api_key
     prompt = (f"Extract the {information} from the following text:\n\n"
-              f"{input_text}\n\n"
-              f"The {information} is:")
+              f"What {information} did {celebrity_name} wear at {event_name}")
     response = openai.Completion.create(
         engine="text-davinci-002",
         prompt=prompt,
@@ -36,11 +35,6 @@ if st.button("Extract Information"):
         st.warning("Please enter the name of the celebrity.")
     elif not event_name:
         st.warning("Please enter the name of the event.")
-    elif information == "All":
-        dress = extract_information("dress and brand", api_key)
-        shoes = extract_information("shoes and brand", api_key)
-        jewelry = extract_information("jewelry and brand", api_key)
-        st.write(f"{celebrity_name} wore {dress}, paired with {shoes} and {jewelry} at {event_name}.")
     else:
-        extracted_info = extract_information(information.lower(), api_key)
+        extracted_info = extract_information(celebrity_name, event_name, information.lower(), api_key)
         st.write(f"{celebrity_name} wore {extracted_info} at {event_name}.")
