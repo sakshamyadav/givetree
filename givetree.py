@@ -21,7 +21,7 @@ if st.button("Generate Text Art"):
             "Authorization": f"Bearer {api_key}" # Use the API key entered by the user
         },
         json={
-            "model": "image-alpha-001", # CLIP guided Diffusion model to use
+            "model": "image-alpha-003", # CLIP guided Diffusion model to use
             "prompt": f"Generate an image of '{text}'",
             "num_images": num_images,
             "size": "1024x1024",
