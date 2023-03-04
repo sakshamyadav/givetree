@@ -25,9 +25,7 @@ if st.button("Generate Text Art"):
             "prompt": f"Generate an image of '{text}'",
             "num_images": num_images,
             "size": "1024x1024",
-            "response_format": "url",
-            "class": "Image",
-            "class_reverse": False
+            "response_format": "url"
         }
     )
 
