@@ -37,4 +37,4 @@ if st.button("Extract Information"):
         st.warning("Please enter the name of the event.")
     else:
         extracted_info = extract_information(celebrity_name, event_name, information.lower(), api_key)
-        st.write(f"{celebrity_name} wore {extracted_info} at {event_name}.")
+        st.write(f"{extracted_info}")
