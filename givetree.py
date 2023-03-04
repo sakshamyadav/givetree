@@ -15,8 +15,8 @@ celebrity_name = st.text_input("Enter the celebrity name:")
 event_name = st.text_input("Enter the event name:")
 
 if st.button("Find Outfit"):
-    prompt = f"What fashion items did {celebrity_name} wear to {event_name}?"
+    prompt = f"What did {celebrity_name} wear to {event_name}?"
     result = generate_text(prompt, api_key)
-    prompt = f"get the dresses, makeup, jewellery, shoes and their brands from {result}"
+    prompt = f"extract key information from: {result}"
     entities = generate_text(prompt, api_key)
     st.write(entities)
